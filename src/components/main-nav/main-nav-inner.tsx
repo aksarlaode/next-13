@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { forwardRef, type FC } from "react";
 import { LogoIcon } from "~/components/icons";
-import { cn } from "~/components/ui/lib/utils";
+import { cn } from "~/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,

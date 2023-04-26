@@ -17,7 +17,7 @@ import type { AppRouter } from "~/server/routers/_app";
 import { api } from "~/trpc/client/trpc-client";
 import { ChevronLeftIcon, ChevronRightIcon, SpinnerIcon } from "./icons";
 import { Button } from "./ui/button";
-import { cn } from "./ui/lib/utils";
+import { cn } from "~/lib/utils";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 interface Row {
@@ -196,11 +196,11 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
           {/* simplified mobile version */}
           <div className="flex flex-1 justify-between sm:hidden">
             <div className="flex gap-2">
-              <Button variant="subtle" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+              <Button variant="outline" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
                 Previous
               </Button>
             </div>
-            <Button variant="subtle" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+            <Button variant="outline" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
               Next
             </Button>
           </div>
@@ -237,14 +237,14 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
               <div>{dataQuery.isFetching ? <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" /> : null}</div>
               <nav className="relative z-0 inline-flex gap-2 -space-x-px rounded-md shadow-sm" aria-label="Pagination">
                 <div className="flex gap-2">
-                  <Button variant="subtle" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+                  <Button variant="outline" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
                     <>
                       <span className="sr-only">Previous</span>
                       <ChevronLeftIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
                     </>
                   </Button>
                 </div>
-                <Button variant="subtle" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+                <Button variant="outline" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
                   <>
                     <span className="sr-only">Next</span>
                     <ChevronRightIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />

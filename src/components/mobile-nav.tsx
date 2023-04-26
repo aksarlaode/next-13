@@ -15,7 +15,7 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import { docsConfig } from "~/config/docs";
 import { siteConfig } from "~/config/site";
 import { LogoIcon } from "./icons";
-import { cn } from "./ui/lib/utils";
+import { cn } from "~/lib/utils";
 
 export function MobileNav() {
   return (
