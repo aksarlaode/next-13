@@ -9,9 +9,6 @@ dependencies:
   '@auth/core':
     specifier: 0.5.1
     version: 0.5.1
-  '@paralleldrive/cuid2':
-    specifier: ^2.2.0
-    version: 2.2.0
   '@planetscale/database':
     specifier: ^1.6.0
     version: 1.6.0
@@ -162,8 +159,8 @@ devDependencies:
     specifier: ^6.0.0
     version: 6.0.0
   drizzle-kit:
-    specifier: 0.17.1-5df459e
-    version: 0.17.1-5df459e
+    specifier: 0.17.6
+    version: 0.17.6
   eslint:
     specifier: 8.37.0
     version: 8.37.0
@@ -645,10 +642,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@noble/hashes@1.2.0:
-    resolution: {integrity: sha512-FZfhjEDbT5GRswV3C6uvLPHMiVD6lQBmpoX5+eSiPaMTXte/IKqI5dykDxzZB/WBeK/CDuQRBWarPdi3FNY2zQ==}
-    dev: false
-
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -669,12 +662,6 @@ packages:
 
   /@panva/hkdf@1.0.4:
     resolution: {integrity: sha512-003xWiCuvePbLaPHT+CRuaV4GlyCAVm6XYSbBZDHoWZGn1mNkVKFaDbGJjjxmEFvizUwlCoM6O18FCBMMky2zQ==}
-
-  /@paralleldrive/cuid2@2.2.0:
-    resolution: {integrity: sha512-CVQDpPIUHrUGGLdrMGz1NmqZvqmsB2j2rCIQEu1EvxWjlFh4fhvEGmgR409cY20/67/WlJsggenq0no3p3kYsw==}
-    dependencies:
-      '@noble/hashes': 1.2.0
-    dev: false
 
   /@planetscale/database@1.6.0:
     resolution: {integrity: sha512-eb02567S706Xme/nVwx+EN/wyoHhHBXl1a7+67R/Xm91myEpLn0vZNl58TvLZztBxje4gga16lc8dLt0elNrJA==}
@@ -2177,8 +2164,8 @@ packages:
       wordwrap: 1.0.0
     dev: true
 
-  /drizzle-kit@0.17.1-5df459e:
-    resolution: {integrity: sha512-GFMOgXmJaXfsxStiStSciQlqTVgTpAOtvAymLkDSQ7kQBKi+rj0FEEva1NR9uOP7XWSCvUl/f/r3OI/lclxgJw==}
+  /drizzle-kit@0.17.6:
+    resolution: {integrity: sha512-diNslu/ItzLv+++7l2noevXaCOrsfDXv+ZxMJWOy061Gs1BeEhP0t+mBKqeOPy8LsEo0aitNKOe+gPltEScmWQ==}
     hasBin: true
     dependencies:
       camelcase: 7.0.1
@@ -2189,7 +2176,6 @@ packages:
       glob: 8.1.0
       hanji: 0.0.5
       json-diff: 0.9.0
-      minimatch: 7.4.3
       zod: 3.21.4
     transitivePeerDependencies:
       - supports-color
@@ -3472,13 +3458,6 @@ packages:
 
   /minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
-    engines: {node: '>=10'}
-    dependencies:
-      brace-expansion: 2.0.1
-    dev: true
-
-  /minimatch@7.4.3:
-    resolution: {integrity: sha512-5UB4yYusDtkRPbRiy1cqZ1IpGNcJCGlEMG17RKzPddpyiPKoCdwohbED8g4QXT0ewCt8LTkQXuljsUfQ3FKM4A==}
     engines: {node: '>=10'}
     dependencies:
       brace-expansion: 2.0.1
