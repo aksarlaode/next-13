@@ -9,9 +9,6 @@ dependencies:
   '@auth/core':
     specifier: 0.5.1
     version: 0.5.1
-  '@paralleldrive/cuid2':
-    specifier: ^2.2.0
-    version: 2.2.0
   '@planetscale/database':
     specifier: ^1.6.0
     version: 1.6.0
@@ -97,8 +94,8 @@ dependencies:
     specifier: ^2.29.3
     version: 2.29.3
   drizzle-orm:
-    specifier: 0.23.2-ec4bb7f
-    version: 0.23.2-ec4bb7f(@planetscale/database@1.6.0)
+    specifier: 0.25.3
+    version: 0.25.3(@planetscale/database@1.6.0)
   lucide-react:
     specifier: ^0.109.0
     version: 0.109.0(react@18.2.0)
@@ -645,10 +642,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@noble/hashes@1.2.0:
-    resolution: {integrity: sha512-FZfhjEDbT5GRswV3C6uvLPHMiVD6lQBmpoX5+eSiPaMTXte/IKqI5dykDxzZB/WBeK/CDuQRBWarPdi3FNY2zQ==}
-    dev: false
-
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -669,12 +662,6 @@ packages:
 
   /@panva/hkdf@1.0.4:
     resolution: {integrity: sha512-003xWiCuvePbLaPHT+CRuaV4GlyCAVm6XYSbBZDHoWZGn1mNkVKFaDbGJjjxmEFvizUwlCoM6O18FCBMMky2zQ==}
-
-  /@paralleldrive/cuid2@2.2.0:
-    resolution: {integrity: sha512-CVQDpPIUHrUGGLdrMGz1NmqZvqmsB2j2rCIQEu1EvxWjlFh4fhvEGmgR409cY20/67/WlJsggenq0no3p3kYsw==}
-    dependencies:
-      '@noble/hashes': 1.2.0
-    dev: false
 
   /@planetscale/database@1.6.0:
     resolution: {integrity: sha512-eb02567S706Xme/nVwx+EN/wyoHhHBXl1a7+67R/Xm91myEpLn0vZNl58TvLZztBxje4gga16lc8dLt0elNrJA==}
@@ -2195,11 +2182,12 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.23.2-ec4bb7f(@planetscale/database@1.6.0):
-    resolution: {integrity: sha512-jsrunjHm9olF/hKZIJse9GLJpG2f3HHveyvEVrZMJtmLEe9YGOnCM78HDLoKzsmzHYYKdWyvIrpxborT0pn0MA==}
+  /drizzle-orm@0.25.3(@planetscale/database@1.6.0):
+    resolution: {integrity: sha512-0LX4Tjh3+3zm8E9T/h+ayj/3KEzNPItpONHfKnKOzBCjW9C1X0T7uUuRdPE+ssXIVLNuk6rvKCKTL3o9caxnKg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
+      '@libsql/client': '*'
       '@neondatabase/serverless': '>=0.1'
       '@planetscale/database': '>=1'
       '@types/better-sqlite3': '*'
@@ -2218,6 +2206,8 @@ packages:
       '@aws-sdk/client-rds-data':
         optional: true
       '@cloudflare/workers-types':
+        optional: true
+      '@libsql/client':
         optional: true
       '@neondatabase/serverless':
         optional: true
