@@ -100,8 +100,8 @@ dependencies:
     specifier: 0.25.3
     version: 0.25.3(@planetscale/database@1.6.0)
   lucide-react:
-    specifier: ^0.109.0
-    version: 0.109.0(react@18.2.0)
+    specifier: ^0.187.0
+    version: 0.187.0(react@18.2.0)
   next:
     specifier: ^13.3.0
     version: 13.3.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)
@@ -3442,8 +3442,8 @@ packages:
       es5-ext: 0.10.62
     dev: true
 
-  /lucide-react@0.109.0(react@18.2.0):
-    resolution: {integrity: sha512-CXBQnHSd/EHaSN+Bs9T73jgCbjb/0IVykFG7NvWjk+kG2skiEgXeIIJjpkta2DVSORy8u6RXN2WZuryiuNmC0Q==}
+  /lucide-react@0.187.0(react@18.2.0):
+    resolution: {integrity: sha512-+k/2djo5opeq22Bb68sA0rjQbI3ToC3nNmsHmaahJ+/6EF2dbWcJ4eWzQZe/97dxndUQ6F2/VqvVXmKHACFnfw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
