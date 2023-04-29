@@ -9,9 +9,6 @@ dependencies:
   '@auth/core':
     specifier: 0.5.1
     version: 0.5.1
-  '@paralleldrive/cuid2':
-    specifier: ^2.2.0
-    version: 2.2.0
   '@planetscale/database':
     specifier: ^1.6.0
     version: 1.6.0
@@ -51,6 +48,9 @@ dependencies:
   '@radix-ui/react-tooltip':
     specifier: ^1.0.5
     version: 1.0.5(@types/react@18.0.21)(react-dom@18.2.0)(react@18.2.0)
+  '@t3-oss/env-nextjs':
+    specifier: ^0.2.2
+    version: 0.2.2(zod@3.21.4)
   '@tailwindcss/line-clamp':
     specifier: ^0.4.2
     version: 0.4.2(tailwindcss@3.2.7)
@@ -645,10 +645,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@noble/hashes@1.2.0:
-    resolution: {integrity: sha512-FZfhjEDbT5GRswV3C6uvLPHMiVD6lQBmpoX5+eSiPaMTXte/IKqI5dykDxzZB/WBeK/CDuQRBWarPdi3FNY2zQ==}
-    dev: false
-
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -669,12 +665,6 @@ packages:
 
   /@panva/hkdf@1.0.4:
     resolution: {integrity: sha512-003xWiCuvePbLaPHT+CRuaV4GlyCAVm6XYSbBZDHoWZGn1mNkVKFaDbGJjjxmEFvizUwlCoM6O18FCBMMky2zQ==}
-
-  /@paralleldrive/cuid2@2.2.0:
-    resolution: {integrity: sha512-CVQDpPIUHrUGGLdrMGz1NmqZvqmsB2j2rCIQEu1EvxWjlFh4fhvEGmgR409cY20/67/WlJsggenq0no3p3kYsw==}
-    dependencies:
-      '@noble/hashes': 1.2.0
-    dev: false
 
   /@planetscale/database@1.6.0:
     resolution: {integrity: sha512-eb02567S706Xme/nVwx+EN/wyoHhHBXl1a7+67R/Xm91myEpLn0vZNl58TvLZztBxje4gga16lc8dLt0elNrJA==}
@@ -1370,6 +1360,23 @@ packages:
     resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
     dependencies:
       tslib: 2.5.0
+
+  /@t3-oss/env-core@0.2.2(zod@3.21.4):
+    resolution: {integrity: sha512-Jiuph14/L3L9EDaU0O0YiLeaKUcWA9c3mWYuKem8+L64i3Iwz+IbKdl5Jp4cx+JbOsS/aptwGZplnxSHhm2gMQ==}
+    peerDependencies:
+      zod: ^3.0.0
+    dependencies:
+      zod: 3.21.4
+    dev: false
+
+  /@t3-oss/env-nextjs@0.2.2(zod@3.21.4):
+    resolution: {integrity: sha512-9LnVpTkf/8WkggyVN6Liz9Ma9a7fLzV00b5BngWj3HI3iWDfddsWaqCf/H0f46Bgu29NubP3Bwajf1JieVrxFA==}
+    peerDependencies:
+      zod: ^3.0.0
+    dependencies:
+      '@t3-oss/env-core': 0.2.2(zod@3.21.4)
+      zod: 3.21.4
+    dev: false
 
   /@tailwindcss/line-clamp@0.4.2(tailwindcss@3.2.7):
     resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}

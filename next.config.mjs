@@ -1,7 +1,7 @@
-// @ts-check
+import "./src/env.mjs";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const config = {
   reactStrictMode: true,
   experimental: {
     appDir: true,
@@ -13,4 +13,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+export default config;

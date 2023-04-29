@@ -1,6 +1,7 @@
 import type { Adapter } from "@auth/core/adapters";
 import { and, eq } from "drizzle-orm/expressions";
 import type { PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless";
+
 import { accounts, sessions, users, verificationTokens } from "../../db/schema";
 
 export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
@@ -13,18 +14,30 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
         name: userData.name,
         image: userData.image,
       });
-      const rows = await db.select().from(users).where(eq(users.email, userData.email)).limit(1);
+      const rows = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, userData.email))
+        .limit(1);
       const row = rows[0];
       if (!row) throw new Error("User not found");
       return row;
     },
     async getUser(id) {
-      const rows = await db.select().from(users).where(eq(users.id, id)).limit(1);
+      const rows = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, id))
+        .limit(1);
       const row = rows[0];
       return row ?? null;
     },
     async getUserByEmail(email) {
-      const rows = await db.select().from(users).where(eq(users.email, email)).limit(1);
+      const rows = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, email))
+        .limit(1);
       const row = rows[0];
       return row ?? null;
     },
@@ -33,7 +46,12 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
         .select()
         .from(users)
         .innerJoin(accounts, eq(users.id, accounts.userId))
-        .where(and(eq(accounts.providerAccountId, providerAccountId), eq(accounts.provider, provider)))
+        .where(
+          and(
+            eq(accounts.providerAccountId, providerAccountId),
+            eq(accounts.provider, provider),
+          ),
+        )
         .limit(1);
       const row = rows[0];
       return row?.users ?? null;
@@ -41,7 +59,11 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
     async updateUser({ id, ...userData }) {
       if (!id) throw new Error("User not found");
       await db.update(users).set(userData).where(eq(users.id, id));
-      const rows = await db.select().from(users).where(eq(users.id, id)).limit(1);
+      const rows = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, id))
+        .limit(1);
       const row = rows[0];
       if (!row) throw new Error("User not found");
       return row;
@@ -69,7 +91,12 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
     async unlinkAccount({ providerAccountId, provider }) {
       await db
         .delete(accounts)
-        .where(and(eq(accounts.providerAccountId, providerAccountId), eq(accounts.provider, provider)));
+        .where(
+          and(
+            eq(accounts.providerAccountId, providerAccountId),
+            eq(accounts.provider, provider),
+          ),
+        );
     },
     async createSession(data) {
       await db.insert(sessions).values({
@@ -78,7 +105,11 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
         sessionToken: data.sessionToken,
         userId: data.userId,
       });
-      const rows = await db.select().from(sessions).where(eq(sessions.sessionToken, data.sessionToken)).limit(1);
+      const rows = await db
+        .select()
+        .from(sessions)
+        .where(eq(sessions.sessionToken, data.sessionToken))
+        .limit(1);
       const row = rows[0];
       if (!row) throw new Error("User not found");
       return row;
@@ -112,8 +143,15 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
       };
     },
     async updateSession(session) {
-      await db.update(sessions).set(session).where(eq(sessions.sessionToken, session.sessionToken));
-      const rows = await db.select().from(sessions).where(eq(sessions.sessionToken, session.sessionToken)).limit(1);
+      await db
+        .update(sessions)
+        .set(session)
+        .where(eq(sessions.sessionToken, session.sessionToken));
+      const rows = await db
+        .select()
+        .from(sessions)
+        .where(eq(sessions.sessionToken, session.sessionToken))
+        .limit(1);
       const row = rows[0];
       if (!row) throw new Error("Coding bug: updated session not found");
       return row;
@@ -133,18 +171,28 @@ export function createDrizzleAdapter(db: PlanetScaleDatabase): Adapter {
         .where(eq(verificationTokens.token, verificationToken.token))
         .limit(1);
       const row = rows[0];
-      if (!row) throw new Error("Coding bug: inserted verification token not found");
+      if (!row)
+        throw new Error("Coding bug: inserted verification token not found");
       return row;
     },
     async useVerificationToken({ identifier, token }) {
       // First get the token while it still exists. TODO: need to add identifier to where clause?
-      const rows = await db.select().from(verificationTokens).where(eq(verificationTokens.token, token)).limit(1);
+      const rows = await db
+        .select()
+        .from(verificationTokens)
+        .where(eq(verificationTokens.token, token))
+        .limit(1);
       const row = rows[0];
       if (!row) return null;
       // Then delete it.
       await db
         .delete(verificationTokens)
-        .where(and(eq(verificationTokens.token, token), eq(verificationTokens.identifier, identifier)));
+        .where(
+          and(
+            eq(verificationTokens.token, token),
+            eq(verificationTokens.identifier, identifier),
+          ),
+        );
       // Then return it.
       return row;
     },

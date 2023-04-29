@@ -25,6 +25,7 @@
     "@radix-ui/react-select": "^1.2.1",
     "@radix-ui/react-separator": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.5",
+    "@t3-oss/env-nextjs": "^0.2.2",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "@tanstack/query-core": "4.29.1",

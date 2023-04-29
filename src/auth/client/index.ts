@@ -1,5 +1,13 @@
-import type { BuiltInProviderType, RedirectableProviderType } from "@auth/core/providers";
-import type { LiteralUnion, SignInAuthorizationParams, SignInOptions, SignOutParams } from "next-auth/react";
+import type {
+  BuiltInProviderType,
+  RedirectableProviderType,
+} from "@auth/core/providers";
+import type {
+  LiteralUnion,
+  SignInAuthorizationParams,
+  SignInOptions,
+  SignOutParams,
+} from "next-auth/react";
 
 /**
  * Client-side method to initiate a signin flow
@@ -8,8 +16,14 @@ import type { LiteralUnion, SignInAuthorizationParams, SignInOptions, SignOutPar
  *
  * [Documentation](https://next-auth.js.org/getting-started/client#signin)
  */
-export async function signIn<P extends RedirectableProviderType | undefined = undefined>(
-  providerId?: LiteralUnion<P extends RedirectableProviderType ? P | BuiltInProviderType : BuiltInProviderType>,
+export async function signIn<
+  P extends RedirectableProviderType | undefined = undefined,
+>(
+  providerId?: LiteralUnion<
+    P extends RedirectableProviderType
+      ? P | BuiltInProviderType
+      : BuiltInProviderType
+  >,
   options?: SignInOptions,
   authorizationParams?: SignInAuthorizationParams,
 ) {
@@ -21,8 +35,10 @@ export async function signIn<P extends RedirectableProviderType | undefined = un
   const isSupportingReturn = isCredentials || isEmail;
 
   // TODO: Handle custom base path
+  const signInUrl = `/api/auth/${
+    isCredentials ? "callback" : "signin"
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  const signInUrl = `/api/auth/${isCredentials ? "callback" : "signin"}/${providerId}`;
+  }/${providerId}`;
 
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const _signInUrl = `${signInUrl}?${new URLSearchParams(authorizationParams)}`;
