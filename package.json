@@ -64,7 +64,7 @@
     "autoprefixer": "^10.4.14",
     "dotenv": "^16.0.3",
     "dotenv-cli": "^6.0.0",
-    "drizzle-kit": "0.17.1-5df459e",
+    "drizzle-kit": "0.17.6",
     "eslint": "8.37.0",
     "eslint-config-next": "12.3.1",
     "eslint-config-prettier": "^8.7.0",
