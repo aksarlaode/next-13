@@ -97,8 +97,8 @@ dependencies:
     specifier: ^2.29.3
     version: 2.29.3
   drizzle-orm:
-    specifier: 0.23.2-ec4bb7f
-    version: 0.23.2-ec4bb7f(@planetscale/database@1.6.0)
+    specifier: 0.25.3
+    version: 0.25.3(@planetscale/database@1.6.0)
   lucide-react:
     specifier: ^0.109.0
     version: 0.109.0(react@18.2.0)
@@ -2202,11 +2202,12 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.23.2-ec4bb7f(@planetscale/database@1.6.0):
-    resolution: {integrity: sha512-jsrunjHm9olF/hKZIJse9GLJpG2f3HHveyvEVrZMJtmLEe9YGOnCM78HDLoKzsmzHYYKdWyvIrpxborT0pn0MA==}
+  /drizzle-orm@0.25.3(@planetscale/database@1.6.0):
+    resolution: {integrity: sha512-0LX4Tjh3+3zm8E9T/h+ayj/3KEzNPItpONHfKnKOzBCjW9C1X0T7uUuRdPE+ssXIVLNuk6rvKCKTL3o9caxnKg==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
+      '@libsql/client': '*'
       '@neondatabase/serverless': '>=0.1'
       '@planetscale/database': '>=1'
       '@types/better-sqlite3': '*'
@@ -2225,6 +2226,8 @@ packages:
       '@aws-sdk/client-rds-data':
         optional: true
       '@cloudflare/workers-types':
+        optional: true
+      '@libsql/client':
         optional: true
       '@neondatabase/serverless':
         optional: true
