@@ -7,8 +7,8 @@ patchedDependencies:
 
 dependencies:
   '@auth/core':
-    specifier: 0.5.1
-    version: 0.5.1
+    specifier: 0.7.1
+    version: 0.7.1
   '@planetscale/database':
     specifier: ^1.6.0
     version: 1.6.0
@@ -204,8 +204,8 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.18
 
-  /@auth/core@0.5.1:
-    resolution: {integrity: sha512-t9z8F7dkuVceKWBmMy1fd2t6H+vfRju/YJ1lm+6RnJ7pNEvX5qMR874wg0+cYbWvyZazLi8fFK/FA6I3D5sSkA==}
+  /@auth/core@0.7.1:
+    resolution: {integrity: sha512-aAgzC/VlfnvxsFYp5Wau1pfIltRUBvfVxECR0imDPUznwXIkD9alvrai60tfImtPfXp1fnJpcKfiONpF5Rg8VQ==}
     peerDependencies:
       nodemailer: ^6.8.0
     peerDependenciesMeta:
