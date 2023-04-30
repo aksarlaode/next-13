@@ -1,19 +1,19 @@
+import { QueryClient, dehydrate } from "@tanstack/query-core";
 import type { DehydratedState } from "@tanstack/react-query";
 import {
   type AnyProcedure,
   type AnyQueryProcedure,
   type AnyRouter,
   type DataTransformer,
+  type MaybePromise,
+  type ProcedureRouterRecord,
   type inferProcedureInput,
   type inferProcedureOutput,
   type inferRouterContext,
-  type MaybePromise,
-  type ProcedureRouterRecord,
 } from "@trpc/server";
 import { createRecursiveProxy } from "@trpc/server/shared";
-import { getRequestStorage } from "./local-storage";
 
-import { dehydrate, QueryClient } from "@tanstack/query-core";
+import { getRequestStorage } from "./local-storage";
 
 interface CreateTRPCNextLayoutOptions<TRouter extends AnyRouter> {
   router: TRouter;
@@ -24,12 +24,17 @@ interface CreateTRPCNextLayoutOptions<TRouter extends AnyRouter> {
 /**
  * @internal
  */
-export type DecorateProcedure<TProcedure extends AnyProcedure> = TProcedure extends AnyQueryProcedure
-  ? {
-      fetch(input: inferProcedureInput<TProcedure>): Promise<inferProcedureOutput<TProcedure>>;
-      fetchInfinite(input: inferProcedureInput<TProcedure>): Promise<inferProcedureOutput<TProcedure>>;
-    }
-  : never;
+export type DecorateProcedure<TProcedure extends AnyProcedure> =
+  TProcedure extends AnyQueryProcedure
+    ? {
+        fetch(
+          input: inferProcedureInput<TProcedure>,
+        ): Promise<inferProcedureOutput<TProcedure>>;
+        fetchInfinite(
+          input: inferProcedureInput<TProcedure>,
+        ): Promise<inferProcedureOutput<TProcedure>>;
+      }
+    : never;
 
 type OmitNever<TType> = Pick<
   TType,
@@ -40,19 +45,31 @@ type OmitNever<TType> = Pick<
 /**
  * @internal
  */
-export type DecoratedProcedureRecord<TProcedures extends ProcedureRouterRecord, TPath extends string = ""> = OmitNever<{
+export type DecoratedProcedureRecord<
+  TProcedures extends ProcedureRouterRecord,
+  TPath extends string = "",
+> = OmitNever<{
   [TKey in keyof TProcedures]: TProcedures[TKey] extends AnyRouter
-    ? DecoratedProcedureRecord<TProcedures[TKey]["_def"]["record"], `${TPath}${TKey & string}.`>
+    ? DecoratedProcedureRecord<
+        TProcedures[TKey]["_def"]["record"],
+        `${TPath}${TKey & string}.`
+      >
     : TProcedures[TKey] extends AnyQueryProcedure
     ? DecorateProcedure<TProcedures[TKey]>
     : never;
 }>;
 
-type CreateTRPCNextLayout<TRouter extends AnyRouter> = DecoratedProcedureRecord<TRouter["_def"]["record"]> & {
+type CreateTRPCNextLayout<TRouter extends AnyRouter> = DecoratedProcedureRecord<
+  TRouter["_def"]["record"]
+> & {
   dehydrate(): Promise<DehydratedState>;
 };
 
-function getQueryKey(path: string[], input: unknown, isFetchInfinite?: boolean) {
+function getQueryKey(
+  path: string[],
+  input: unknown,
+  isFetchInfinite?: boolean,
+) {
   return input === undefined
     ? [path, { type: isFetchInfinite ? "infinite" : "query" }]
     : [
@@ -125,7 +142,9 @@ export function createTRPCNextLayout<TRouter extends AnyRouter>(
     const queryKey = getQueryKey(path, input, lastPart === "fetchInfinite");
 
     if (lastPart === "fetchInfinite") {
-      return queryClient.fetchInfiniteQuery(queryKey, () => caller.query(pathStr, input));
+      return queryClient.fetchInfiniteQuery(queryKey, () =>
+        caller.query(pathStr, input),
+      );
     }
 
     return queryClient.fetchQuery(queryKey, () => caller.query(pathStr, input));

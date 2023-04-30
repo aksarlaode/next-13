@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo, useState, type FC } from "react";
+import Link from "next/link";
 import { dehydrate, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   flexRender,
@@ -11,14 +13,19 @@ import {
 } from "@tanstack/react-table";
 import type { inferRouterOutputs } from "@trpc/server";
 import { format } from "date-fns";
-import Link from "next/link";
-import { useMemo, useState, type FC } from "react";
-import type { AppRouter } from "~/server/routers/_app";
+
+import { cn } from "~/lib/utils";
+import type { AppRouter } from "~/server/api/root";
 import { api } from "~/trpc/client/trpc-client";
 import { ChevronLeftIcon, ChevronRightIcon, SpinnerIcon } from "./icons";
 import { Button } from "./ui/button";
-import { cn } from "~/lib/utils";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 interface Row {
   title: string;
@@ -85,7 +92,11 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
 
   const dataQuery = api.example.getInfinitePosts.useInfiniteQuery(
     { limit: fetchDataOptions.pageSize },
-    { getNextPageParam: (lastPage) => lastPage.nextCursor, refetchOnWindowFocus: false, keepPreviousData: true },
+    {
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+      refetchOnWindowFocus: false,
+      keepPreviousData: true,
+    },
   );
 
   const onPaginationChange: OnChangeFn<PaginationState> = (paginationState) => {
@@ -96,9 +107,13 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
 
   const defaultData = useMemo(() => [], []);
 
-  const pagination = useMemo(() => ({ pageIndex, pageSize }), [pageIndex, pageSize]);
+  const pagination = useMemo(
+    () => ({ pageIndex, pageSize }),
+    [pageIndex, pageSize],
+  );
 
-  const totalCount = (dataQuery.data?.pages[pagination.pageIndex]?.totalCount as number) ?? 0;
+  const totalCount =
+    (dataQuery.data?.pages[pagination.pageIndex]?.totalCount as number) ?? 0;
   const pageCount = useMemo(() => {
     return Math.ceil(totalCount / pageSize);
   }, [totalCount, pageSize]);
@@ -151,7 +166,10 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
                             <div className="flex items-center justify-between">
                               {header.isPlaceholder ? null : (
                                 <div className="text-sm text-slate-200">
-                                  {flexRender(header.column.columnDef.header, header.getContext())}
+                                  {flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext(),
+                                  )}
                                 </div>
                               )}
                             </div>
@@ -167,15 +185,23 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
                       <tr key={row.id}>
                         {row.getVisibleCells().map((cell) => {
                           return (
-                            <td className="w-[50%] whitespace-nowrap text-sm text-slate-300" role="cell" key={cell.id}>
+                            <td
+                              className="w-[50%] whitespace-nowrap text-sm text-slate-300"
+                              role="cell"
+                              key={cell.id}
+                            >
                               <Link
                                 href={`/post/${row.original.slug}`}
                                 className={cn(
                                   "block h-full w-full px-6 py-4",
-                                  cell.column.id === "filename" && "hover:underline",
+                                  cell.column.id === "filename" &&
+                                    "hover:underline",
                                 )}
                               >
-                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                {flexRender(
+                                  cell.column.columnDef.cell,
+                                  cell.getContext(),
+                                )}
                               </Link>
                             </td>
                           );
@@ -196,11 +222,19 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
           {/* simplified mobile version */}
           <div className="flex flex-1 justify-between sm:hidden">
             <div className="flex gap-2">
-              <Button variant="outline" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+              <Button
+                variant="outline"
+                onClick={() => table.previousPage()}
+                disabled={!table.getCanPreviousPage()}
+              >
                 Previous
               </Button>
             </div>
-            <Button variant="outline" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+            <Button
+              variant="outline"
+              onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+            >
               Next
             </Button>
           </div>
@@ -209,8 +243,11 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
           <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div className="flex items-center gap-x-2">
               <span className="text-sm text-gray-500">
-                Page <span className="font-medium">{table.getState().pagination.pageIndex + 1}</span> of{" "}
-                <span className="font-medium">{table.getPageCount()}</span>
+                Page{" "}
+                <span className="font-medium">
+                  {table.getState().pagination.pageIndex + 1}
+                </span>{" "}
+                of <span className="font-medium">{table.getPageCount()}</span>
               </span>
               <label>
                 <span className="sr-only">Items Per Page</span>
@@ -234,20 +271,41 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
               </label>
             </div>
             <div className="flex items-center">
-              <div>{dataQuery.isFetching ? <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" /> : null}</div>
-              <nav className="relative z-0 inline-flex gap-2 -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+              <div>
+                {dataQuery.isFetching ? (
+                  <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+              </div>
+              <nav
+                className="relative z-0 inline-flex gap-2 -space-x-px rounded-md shadow-sm"
+                aria-label="Pagination"
+              >
                 <div className="flex gap-2">
-                  <Button variant="outline" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+                  <Button
+                    variant="outline"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                  >
                     <>
                       <span className="sr-only">Previous</span>
-                      <ChevronLeftIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                      <ChevronLeftIcon
+                        className="h-5 w-5 text-gray-500"
+                        aria-hidden="true"
+                      />
                     </>
                   </Button>
                 </div>
-                <Button variant="outline" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+                <Button
+                  variant="outline"
+                  onClick={() => table.nextPage()}
+                  disabled={!table.getCanNextPage()}
+                >
                   <>
                     <span className="sr-only">Next</span>
-                    <ChevronRightIcon className="h-5 w-5 text-gray-500" aria-hidden="true" />
+                    <ChevronRightIcon
+                      className="h-5 w-5 text-gray-500"
+                      aria-hidden="true"
+                    />
                   </>
                 </Button>
               </nav>

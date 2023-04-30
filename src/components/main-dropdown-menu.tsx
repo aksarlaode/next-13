@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import type { FC } from "react";
-import { signOut } from "~/auth/client";
+import Link from "next/link";
+
 import { LogOutIcon, UserIcon } from "~/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
@@ -15,6 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { signOut } from "~/auth/client";
 
 export interface Props {
   avatarFallbackText?: string;
@@ -28,7 +29,9 @@ export const MainDropdownMenu: FC<Props> = ({ user, avatarFallbackText }) => {
         <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar>
             <AvatarImage src={user.image} alt="User avatar" />
-            {avatarFallbackText && <AvatarFallback>{avatarFallbackText}</AvatarFallback>}
+            {avatarFallbackText && (
+              <AvatarFallback>{avatarFallbackText}</AvatarFallback>
+            )}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -43,7 +46,10 @@ export const MainDropdownMenu: FC<Props> = ({ user, avatarFallbackText }) => {
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
-        <DropdownMenuItem onClick={() => void signOut()} className="cursor-pointer">
+        <DropdownMenuItem
+          onClick={() => void signOut()}
+          className="cursor-pointer"
+        >
           <LogOutIcon className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

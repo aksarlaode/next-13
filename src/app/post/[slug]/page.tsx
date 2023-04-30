@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+
 import SignInButtons from "~/components/sign-in-options";
 import { rsc } from "~/shared/server-rsc/trpc";
 
@@ -33,14 +34,18 @@ const PostSlug: NextPage<Props> = async ({ params }) => {
             <div className="w-full max-w-[600px]">
               <div className="grid gap-4">
                 <div className="flex flex-col gap-4">
-                  <div className="flex w-full max-w-sm flex-col gap-4 text-2xl">{post.title}</div>
+                  <div className="flex w-full max-w-sm flex-col gap-4 text-2xl">
+                    {post.title}
+                  </div>
                 </div>
               </div>
             </div>
             <div className="w-full max-w-[600px]">
               <div className="grid gap-4">
                 <div className="flex flex-col gap-4">
-                  <div className="flex w-full max-w-sm flex-col gap-4">{post.text}</div>
+                  <div className="flex w-full max-w-sm flex-col gap-4">
+                    {post.text}
+                  </div>
                 </div>
               </div>
             </div>

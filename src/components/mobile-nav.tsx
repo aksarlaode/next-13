@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
@@ -14,8 +15,8 @@ import {
 import { ScrollArea } from "~/components/ui/scroll-area";
 import { docsConfig } from "~/config/docs";
 import { siteConfig } from "~/config/site";
-import { LogoIcon } from "./icons";
 import { cn } from "~/lib/utils";
+import { LogoIcon } from "./icons";
 
 export function MobileNav() {
   return (
@@ -25,10 +26,16 @@ export function MobileNav() {
           variant="ghost"
           className="-ml-4 text-base hover:bg-transparent focus:ring-0  focus:ring-offset-0 md:hidden"
         >
-          <LogoIcon className="mr-2 h-4 w-4" /> <span className="font-bold">Menu</span>
+          <LogoIcon className="mr-2 h-4 w-4" />{" "}
+          <span className="font-bold">Menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" sideOffset={24} alignOffset={4} className="w-[300px] overflow-scroll">
+      <DropdownMenuContent
+        align="start"
+        sideOffset={24}
+        alignOffset={4}
+        className="w-[300px] overflow-scroll"
+      >
         <DropdownMenuItem asChild>
           <Link href="/" className="flex items-center">
             <LogoIcon className="mr-2 h-4 w-4" /> {siteConfig.name}
@@ -56,7 +63,11 @@ export function MobileNav() {
               {item?.items?.length &&
                 item.items.map((item) => (
                   <DropdownMenuItem key={item.title} asChild>
-                    {item.href ? <Link href={item.href}>{item.title}</Link> : item.title}
+                    {item.href ? (
+                      <Link href={item.href}>{item.title}</Link>
+                    ) : (
+                      item.title
+                    )}
                   </DropdownMenuItem>
                 ))}
             </DropdownMenuGroup>

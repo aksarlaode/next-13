@@ -2,15 +2,15 @@
  * This is an example router, you can delete this file and then update `../pages/api/trpc/[trpc].tsx`
  */
 import { TRPCError } from "@trpc/server";
-import { sql } from "drizzle-orm";
-import { eq, gte } from "drizzle-orm/expressions";
+import { eq, gte, sql } from "drizzle-orm";
 import { z } from "zod";
+
 import { db } from "~/db/drizzle-db";
 import { posts } from "~/db/schema";
-import { privateProcedure, publicProcedure, router } from "../trpc";
+import { protectedProcedure, publicProcedure, createTRPCRouter } from "../trpc";
 
-export const exampleRouter = router({
-  createPost: privateProcedure
+export const exampleRouter = createTRPCRouter({
+  createPost: protectedProcedure
     .input(
       z.object({
         text: z.string(),
@@ -30,22 +30,24 @@ export const exampleRouter = router({
       });
     }),
 
-  getPost: publicProcedure.input(z.object({ slug: z.string() })).query(async ({ input }) => {
-    const files = await db
-      .select({ title: posts.title, text: posts.text })
-      .from(posts)
-      .where(eq(posts.slug, input.slug))
-      .limit(1);
-    const file = files[0];
+  getPost: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      const files = await db
+        .select({ title: posts.title, text: posts.text })
+        .from(posts)
+        .where(eq(posts.slug, input.slug))
+        .limit(1);
+      const file = files[0];
 
-    // NOT_FOUND is fine if the file exists but the user doesn't have access to it. This prevents revealing that the file exists.
-    if (!file) throw new TRPCError({ code: "NOT_FOUND" });
+      // NOT_FOUND is fine if the file exists but the user doesn't have access to it. This prevents revealing that the file exists.
+      if (!file) throw new TRPCError({ code: "NOT_FOUND" });
 
-    return {
-      title: file.title,
-      text: file.text,
-    };
-  }),
+      return {
+        title: file.title,
+        text: file.text,
+      };
+    }),
 
   getInfinitePosts: publicProcedure
     .input(
@@ -57,12 +59,21 @@ export const exampleRouter = router({
     .query(async ({ input }) => {
       const limit = input.limit ?? 50;
 
-      const countRows = await db.select({ files_count: sql<number>`count(${posts.id})`.as("files_count") }).from(posts);
+      const countRows = await db
+        .select({
+          files_count: sql<number>`count(${posts.id})`.as("files_count"),
+        })
+        .from(posts);
       const totalCount = countRows[0]?.files_count;
-      if (totalCount === undefined) throw new Error("Failed to query total file count");
+      if (totalCount === undefined)
+        throw new Error("Failed to query total file count");
 
       let itemsQuery = db
-        .select({ created_at: posts.created_at, slug: posts.slug, title: posts.title })
+        .select({
+          created_at: posts.created_at,
+          slug: posts.slug,
+          title: posts.title,
+        })
         .from(posts)
         .limit(input.limit);
       const cursor = input.cursor;

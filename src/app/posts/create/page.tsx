@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import SignInButtons from "~/components/sign-in-options";
 import { rsc } from "~/shared/server-rsc/trpc";
 import CreatePostForm from "./create-post-form";
@@ -20,7 +21,11 @@ const CreatePost: FC = async () => {
       <div className="flex w-full max-w-[600px] flex-col items-center gap-4">
         {!user && <SignInButtons />}
 
-        {!!user ? <CreatePostForm /> : <div>You must sign in to create a post.</div>}
+        {!!user ? (
+          <CreatePostForm />
+        ) : (
+          <div>You must sign in to create a post.</div>
+        )}
       </div>
     </>
   );

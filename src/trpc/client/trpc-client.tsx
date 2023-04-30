@@ -1,11 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, loggerLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
-import { useState } from "react";
 import superjson from "superjson";
-import type { AppRouter } from "~/server/routers/_app";
+
+import type { AppRouter } from "~/server/api/root";
 
 export const api = createTRPCReact<AppRouter>({
   unstable_overrides: {
@@ -30,14 +31,15 @@ function getBaseUrl() {
   if (process.env.RENDER_INTERNAL_HOSTNAME) {
     // reference for render.com
     const port = process.env.PORT;
-    if (!port) throw new Error("PORT is not set but RENDER_INTERNAL_HOSTNAME is set");
+    if (!port)
+      throw new Error("PORT is not set but RENDER_INTERNAL_HOSTNAME is set");
     return `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${port}`;
   }
   // assume localhost
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
-export function ClientProvider(props: { children: React.ReactNode }) {
+export function ClientProvider({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -66,7 +68,7 @@ export function ClientProvider(props: { children: React.ReactNode }) {
   return (
     <api.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
-        {props.children}
+        {children}
         {/* This causes "Warning: validateDOMNesting(...): <aside> cannot appear as a child of <html> in the browser console during development, so we comment it out for now */}
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>

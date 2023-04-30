@@ -1,5 +1,4 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-import _default from "next/dist/client/router";
 import { z } from "zod";
 
 export const env = createEnv({

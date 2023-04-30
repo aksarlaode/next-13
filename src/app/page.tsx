@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { PostsTable } from "~/components/posts-table";
 import SignInButtons from "~/components/sign-in-options";
 import { rsc } from "~/shared/server-rsc/trpc";

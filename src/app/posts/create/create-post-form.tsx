@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, type FC } from "react";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { Label } from "../../../components/ui/label";
-import { api } from "../../../trpc/client/trpc-client";
+
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
+import { api } from "~/trpc/client/trpc-client";
 
 const CreatePostForm: FC = () => {
   const [postTitle, setPostTitle] = useState("");
@@ -18,19 +19,22 @@ const CreatePostForm: FC = () => {
       onSubmit={(e) => {
         e.preventDefault();
         if (!canCreatePost) throw new Error("invalid input"); // the ui should have prevented this
-        void createPostMutation.mutateAsync({ title: postTitle, text: postText });
+        void createPostMutation.mutateAsync({
+          title: postTitle,
+          text: postText,
+        });
       }}
     >
       <div className="flex justify-between">
         <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="password">Title</Label>
+          <Label htmlFor="postTitle">Title</Label>
           <div className="flex w-full items-center space-x-2">
             <Input
               id="postTitle"
               value={postTitle}
               onChange={(e) => setPostTitle(e.target.value)}
               className="flex-1"
-              autoComplete="new-password"
+              autoComplete="new-title"
             />
           </div>
         </div>
@@ -38,14 +42,14 @@ const CreatePostForm: FC = () => {
 
       <div className="flex justify-between">
         <div className="flex w-full flex-col gap-2">
-          <Label htmlFor="password">Content</Label>
+          <Label htmlFor="postText">Content</Label>
           <div className="flex w-full items-center space-x-2">
             <Input
               id="postText"
               value={postText}
               onChange={(e) => setPostText(e.target.value)}
               className="flex-1"
-              autoComplete="new-password"
+              autoComplete="new-text"
             />
           </div>
         </div>

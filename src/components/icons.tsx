@@ -1,5 +1,6 @@
 "use client";
 
+import { type FC } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -10,7 +11,6 @@ import {
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react";
-import { type FC } from "react";
 
 export type Icon = LucideIcon;
 

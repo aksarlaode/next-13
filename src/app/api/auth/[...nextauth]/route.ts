@@ -1,4 +1,5 @@
 import { type NextRequest } from "next/server";
+
 import { authConfig } from "~/auth/options";
 import { SolidAuthHandler } from "~/auth/server";
 

@@ -13,16 +13,16 @@ export const authConfig: SolidAuthConfig = {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore growing pains
     GithubProvider({
-      clientId: env.GITHUB_ID as string,
-      clientSecret: env.GITHUB_SECRET as string,
+      clientId: env.GITHUB_ID,
+      clientSecret: env.GITHUB_SECRET,
       //clientId: process.env.GITHUB_ID as string,
       //clientSecret: process.env.GITHUB_SECRET as string,
     }),
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore growing pains
     GoogleProvider({
-      clientId: env.GITHUB_SECRET as string,
-      clientSecret: env.GOOGLE_CLIENT_SECRET as string,
+      clientId: env.GITHUB_SECRET,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
       //clientId: process.env.GOOGLE_CLIENT_ID as string,
       //clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),

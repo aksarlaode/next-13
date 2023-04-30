@@ -12,7 +12,10 @@ const config = {
   trailingComma: "all",
   tabWidth: 2,
   // pluginSearchDirs: false,
-  plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+  plugins: [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+  ],
   tailwindConfig: "./tailwind.config.cjs",
   importOrder: [
     "^(react/(.*)$)|^(react$)",

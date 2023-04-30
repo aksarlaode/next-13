@@ -1,10 +1,11 @@
 /**
  * This file contains the root router of your tRPC-backend
  */
-import { publicProcedure, router } from "../trpc";
-import { exampleRouter } from "./example";
 
-export const appRouter = router({
+import { exampleRouter } from "./routers/example";
+import { createTRPCRouter, publicProcedure } from "./trpc";
+
+export const appRouter = createTRPCRouter({
   example: exampleRouter,
   whoami: publicProcedure.query(({ ctx }) => {
     return ctx.user ?? null;

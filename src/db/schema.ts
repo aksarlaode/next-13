@@ -1,4 +1,13 @@
-import { datetime, index, int, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
+import {
+  datetime,
+  index,
+  int,
+  mysqlTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  varchar,
+} from "drizzle-orm/mysql-core";
 
 export const accounts = mysqlTable(
   "accounts",
@@ -19,10 +28,9 @@ export const accounts = mysqlTable(
     updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   },
   (account) => ({
-    providerProviderAccountIdIndex: uniqueIndex("accounts__provider__providerAccountId__idx").on(
-      account.provider,
-      account.providerAccountId,
-    ),
+    providerProviderAccountIdIndex: uniqueIndex(
+      "accounts__provider__providerAccountId__idx",
+    ).on(account.provider, account.providerAccountId),
     userIdIndex: index("accounts__userId__idx").on(account.userId),
   }),
 );
@@ -38,7 +46,9 @@ export const sessions = mysqlTable(
     updated_at: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
   (session) => ({
-    sessionTokenIndex: uniqueIndex("sessions__sessionToken__idx").on(session.sessionToken),
+    sessionTokenIndex: uniqueIndex("sessions__sessionToken__idx").on(
+      session.sessionToken,
+    ),
     userIdIndex: index("sessions__userId__idx").on(session.userId),
   }),
 );
@@ -69,7 +79,9 @@ export const verificationTokens = mysqlTable(
     updated_at: timestamp("updated_at").notNull().defaultNow().onUpdateNow(),
   },
   (verificationToken) => ({
-    tokenIndex: uniqueIndex("verification_tokens__token__idx").on(verificationToken.token),
+    tokenIndex: uniqueIndex("verification_tokens__token__idx").on(
+      verificationToken.token,
+    ),
   }),
 );
 

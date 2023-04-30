@@ -1,5 +1,5 @@
 import type { Adapter } from "@auth/core/adapters";
-import { and, eq } from "drizzle-orm/expressions";
+import { and, eq } from "drizzle-orm";
 import type { PlanetScaleDatabase } from "drizzle-orm/planetscale-serverless";
 
 import { accounts, sessions, users, verificationTokens } from "../../db/schema";
