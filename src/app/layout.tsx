@@ -3,7 +3,7 @@ import { type PropsWithChildren } from "react";
 import { Inter as FontSans } from "next/font/google";
 import Link from "next/link";
 
-import { LogoIcon } from "~/components/icons";
+import { Icons } from "~/components/icons";
 import { MainDropdownMenu } from "~/components/main-dropdown-menu";
 import { MainNav } from "~/components/main-nav/main-nav";
 import { MobileNav } from "~/components/mobile-nav";
@@ -83,7 +83,7 @@ export default async function RootLayout(props: PropsWithChildren) {
               <footer className="container">
                 <div className="flex flex-col items-center justify-between gap-4 border-t border-t-slate-200 py-10 dark:border-t-slate-700 md:h-24 md:flex-row md:py-0">
                   <div className="flex flex-row items-center gap-4 px-8 md:px-0">
-                    <LogoIcon className="h-6 w-6" />
+                    <Icons.logo className="h-6 w-6" />
                     <p className="flex gap-4 text-center text-sm leading-loose text-slate-600 dark:text-slate-400 md:text-left">
                       <Link
                         href="/profile"

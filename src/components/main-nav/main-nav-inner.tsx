@@ -3,7 +3,7 @@
 import { forwardRef, type FC } from "react";
 import Link from "next/link";
 
-import { LogoIcon } from "~/components/icons";
+import { Icons } from "~/components/icons";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -47,7 +47,7 @@ export const MainNavInner: FC<Props> = ({ user }) => {
   return (
     <div className="hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <LogoIcon className="h-6 w-6" />
+        <Icons.logo className="h-6 w-6" />
         <span className="hidden font-bold sm:inline-block">
           {siteConfig.name}
         </span>

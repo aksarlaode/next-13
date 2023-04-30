@@ -2,9 +2,9 @@
 
 import { type FC } from "react";
 
+import { Icons } from "~/components/icons";
+import { Button } from "~/components/ui/button";
 import { signIn } from "~/auth/client";
-import { GithubIcon, GoogleIcon } from "./icons";
-import { Button } from "./ui/button";
 
 const SignInButtons: FC = () => {
   return (
@@ -14,7 +14,7 @@ const SignInButtons: FC = () => {
         className="gap-2"
         onClick={() => void signIn("github")}
       >
-        <GithubIcon className="h-5 w-5 text-gray-500" />
+        <Icons.gitHub className="h-5 w-5 text-gray-500" />
         Authenticate
       </Button>
       <Button
@@ -22,7 +22,7 @@ const SignInButtons: FC = () => {
         className="gap-2"
         onClick={() => void signIn("google")}
       >
-        <GoogleIcon className="h-5 w-5 text-gray-500" />
+        <Icons.google className="h-5 w-5 text-gray-500" />
         Authenticate
       </Button>
     </div>

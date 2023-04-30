@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { rsc } from "../../shared/server-rsc/trpc";
+import { rsc } from "~/shared/server-rsc/trpc";
 import { MainNavInner } from "./main-nav-inner";
 
 /* @ts-expect-error Async Server Component */

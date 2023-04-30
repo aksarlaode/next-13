@@ -17,7 +17,7 @@ import { format } from "date-fns";
 import { cn } from "~/lib/utils";
 import type { AppRouter } from "~/server/api/root";
 import { api } from "~/trpc/client/trpc-client";
-import { ChevronLeftIcon, ChevronRightIcon, SpinnerIcon } from "./icons";
+import { Icons } from "./icons";
 import { Button } from "./ui/button";
 import {
   Select,
@@ -273,7 +273,7 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
             <div className="flex items-center">
               <div>
                 {dataQuery.isFetching ? (
-                  <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />
+                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 ) : null}
               </div>
               <nav
@@ -288,7 +288,7 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
                   >
                     <>
                       <span className="sr-only">Previous</span>
-                      <ChevronLeftIcon
+                      <Icons.chevronLeft
                         className="h-5 w-5 text-gray-500"
                         aria-hidden="true"
                       />
@@ -302,7 +302,7 @@ export const PostsTable: FC<Props> = ({ pageSizes, initialPageSize }) => {
                 >
                   <>
                     <span className="sr-only">Next</span>
-                    <ChevronRightIcon
+                    <Icons.chevronRight
                       className="h-5 w-5 text-gray-500"
                       aria-hidden="true"
                     />

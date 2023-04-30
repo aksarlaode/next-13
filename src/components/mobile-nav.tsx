@@ -16,7 +16,7 @@ import { ScrollArea } from "~/components/ui/scroll-area";
 import { docsConfig } from "~/config/docs";
 import { siteConfig } from "~/config/site";
 import { cn } from "~/lib/utils";
-import { LogoIcon } from "./icons";
+import { Icons } from "./icons";
 
 export function MobileNav() {
   return (
@@ -26,7 +26,7 @@ export function MobileNav() {
           variant="ghost"
           className="-ml-4 text-base hover:bg-transparent focus:ring-0  focus:ring-offset-0 md:hidden"
         >
-          <LogoIcon className="mr-2 h-4 w-4" />{" "}
+          <Icons.logo className="mr-2 h-4 w-4" />{" "}
           <span className="font-bold">Menu</span>
         </Button>
       </DropdownMenuTrigger>
@@ -38,7 +38,7 @@ export function MobileNav() {
       >
         <DropdownMenuItem asChild>
           <Link href="/" className="flex items-center">
-            <LogoIcon className="mr-2 h-4 w-4" /> {siteConfig.name}
+            <Icons.logo className="mr-2 h-4 w-4" /> {siteConfig.name}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

@@ -3,7 +3,7 @@
 import type { FC } from "react";
 import Link from "next/link";
 
-import { LogOutIcon, UserIcon } from "~/components/icons";
+import { Icons } from "~/components/icons";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import {
@@ -41,7 +41,7 @@ export const MainDropdownMenu: FC<Props> = ({ user, avatarFallbackText }) => {
         <DropdownMenuGroup>
           <Link href="/profile">
             <DropdownMenuItem className="cursor-pointer">
-              <UserIcon className="mr-2 h-4 w-4" />
+              <Icons.user className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </DropdownMenuItem>
           </Link>
@@ -50,7 +50,7 @@ export const MainDropdownMenu: FC<Props> = ({ user, avatarFallbackText }) => {
           onClick={() => void signOut()}
           className="cursor-pointer"
         >
-          <LogOutIcon className="mr-2 h-4 w-4" />
+          <Icons.loguot className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
