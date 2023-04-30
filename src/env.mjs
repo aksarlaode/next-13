@@ -22,9 +22,9 @@ export const env = createEnv({
 
     // Provider
     GITHUB_ID: z.string(),
-    GITHUB_SECRET: z.string()
-    GOOGLE_CLIENT_ID: z.string()
-    GOOGLE_CLIENT_SECRET=z.string()
+    GITHUB_SECRET: z.string(),
+    GOOGLE_CLIENT_ID: z.string(),
+    GOOGLE_CLIENT_SECRET=z.string(),
   },
   client: {
     //NEXT_PUBLIC_PUBLISHABLE_KEY: z.string().min(1).optional(),
