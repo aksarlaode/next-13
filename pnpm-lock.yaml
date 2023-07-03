@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 patchedDependencies:
   '@tanstack/react-query@4.29.1':
     hash: ofxwhsft6yhbqzmuaz6xnxhbqi
